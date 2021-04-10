@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebaTecnicaRonal", "PruebaTecnicaRonal\PruebaTecnicaRonal.csproj", "{F9866E6C-A55E-46D0-A297-5A7A4E50C59F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infracstructure", "Infracstructure\Infracstructure.csproj", "{6BEFE475-53B5-4254-8078-F5F6E2616399}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9866E6C-A55E-46D0-A297-5A7A4E50C59F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9866E6C-A55E-46D0-A297-5A7A4E50C59F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9866E6C-A55E-46D0-A297-5A7A4E50C59F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9866E6C-A55E-46D0-A297-5A7A4E50C59F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BEFE475-53B5-4254-8078-F5F6E2616399}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BEFE475-53B5-4254-8078-F5F6E2616399}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BEFE475-53B5-4254-8078-F5F6E2616399}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BEFE475-53B5-4254-8078-F5F6E2616399}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2020BED0-7369-46B9-B9B3-D5B3BE4E5597}
+	EndGlobalSection
+EndGlobal
