@@ -6,6 +6,11 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PruebaTecnicaRonal", "PruebaTecnicaRonal\PruebaTecnicaRonal.csproj", "{F9866E6C-A55E-46D0-A297-5A7A4E50C59F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infracstructure", "Infracstructure\Infracstructure.csproj", "{6BEFE475-53B5-4254-8078-F5F6E2616399}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E2C534D6-448F-4800-9555-10F68A02F1EA} = {E2C534D6-448F-4800-9555-10F68A02F1EA}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{E2C534D6-448F-4800-9555-10F68A02F1EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,10 @@ Global
 		{6BEFE475-53B5-4254-8078-F5F6E2616399}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BEFE475-53B5-4254-8078-F5F6E2616399}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BEFE475-53B5-4254-8078-F5F6E2616399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2C534D6-448F-4800-9555-10F68A02F1EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2C534D6-448F-4800-9555-10F68A02F1EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2C534D6-448F-4800-9555-10F68A02F1EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2C534D6-448F-4800-9555-10F68A02F1EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

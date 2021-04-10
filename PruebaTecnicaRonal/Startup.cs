@@ -8,6 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Infracstructure.DataAccess;
 using System;
 using Microsoft.EntityFrameworkCore;
+using Core.UseCases;
+using Core.Interfaces;
+using Core.Entities;
 
 namespace PruebaTecnicaRonal
 {
@@ -32,8 +35,11 @@ namespace PruebaTecnicaRonal
 
             services.AddDbContext<PTContext>(options =>
             {
-                options.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTION_STRING"));
+                //options.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTION_STRING"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+            services.AddScoped<IRepositorio<Libro>, Repositorio<Libro>>();
+            services.AddScoped<IBussinessLogic<Libro>, BussinessLogic<Libro>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

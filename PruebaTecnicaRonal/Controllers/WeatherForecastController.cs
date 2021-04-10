@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.Entities;
+using Core.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,23 +19,28 @@ namespace PruebaTecnicaRonal.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IRepositorio<Libro> _repositorio;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IRepositorio<Libro> repositorio)
         {
             _logger = logger;
+            _repositorio = repositorio;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<Libro> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            IEnumerable<Libro> Libros;
+            try
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+                
+                Libros = _repositorio.Read();
+
+            }catch(Exception e)
+            {
+                Libros = null;
+            }
+            return Libros;
         }
     }
 }

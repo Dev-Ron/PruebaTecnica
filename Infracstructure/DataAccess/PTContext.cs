@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infracstructure.DataAccess
 {
@@ -8,6 +9,9 @@ namespace Infracstructure.DataAccess
         {
 
         }
+
+        public DbSet<Autor> Autor { get; set; }
+        public DbSet<Libro> Libro { get; set; }
     }
 }
 
