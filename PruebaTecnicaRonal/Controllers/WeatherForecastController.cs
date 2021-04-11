@@ -19,9 +19,9 @@ namespace PruebaTecnicaRonal.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IRepositorio<Libro> _repositorio;
+        private readonly IRepositorio _repositorio;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IRepositorio<Libro> repositorio)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IRepositorio repositorio)
         {
             _logger = logger;
             _repositorio = repositorio;
@@ -34,7 +34,7 @@ namespace PruebaTecnicaRonal.Controllers
             try
             {
                 
-                Libros = _repositorio.Read();
+                Libros = _repositorio.Read<Libro>();
 
             }catch(Exception e)
             {

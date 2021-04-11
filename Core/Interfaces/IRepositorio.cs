@@ -2,59 +2,58 @@
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    public interface IRepositorio<T> where T : BaseEntity
+    public interface IRepositorio
     {
         #region 'CREATE'
 
-        T Create(T obj);
-        Task<T> CreateAsync(T obj);
-        IEnumerable<T> AddRange(IEnumerable<T> obj);
-        Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> obj);
+        T Create<T>(T obj) where T : BaseEntity;
+        Task<T> CreateAsync<T>(T obj)where T : BaseEntity;
+        IEnumerable<T> AddRange<T>(IEnumerable<T> obj)where T : BaseEntity;
+        Task<IEnumerable<T>> AddRangeAsync<T>(IEnumerable<T> obj)where T : BaseEntity;
         #endregion
         #region 'READ'
-        IEnumerable<T> Read();
-        Task<IEnumerable<T>> ReadAsync();
-        Boolean Exist(Expression<Func<T, bool>> matchitem);
-        Task<Boolean> ExistAsync(Expression<Func<T, bool>> matchitem);
-        T Find(Expression<Func<T, bool>> matchitem); /*Single Item*/
-        Task<T> FindAsync(Expression<Func<T, bool>> matchitem);
-        T FindInclude(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria);
-        Task<T> FindIncludeAsync(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria);
-        IEnumerable<T> FindAll(Expression<Func<T, bool>> matchitem); /*Many Items*/
-        IEnumerable<T> FindAllInclude(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria);/*Include Relationship of T*/
-        Task<IEnumerable<T>> FindAllIncludeAsync(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria); /*Include Relationship of T*/
-        Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> matchitem);
-        IEnumerable<T> FindAllWhere(Expression<Func<T, bool>> matchitem);
-        Task<IEnumerable<T>> FindAllWhereAsync(Expression<Func<T, bool>> matchitem);
-        IEnumerable<T> FindAllWhereTake(Expression<Func<T, bool>> matchitem, int count);
-        Task<IEnumerable<T>> FindAllWhereTakeAsync(Expression<Func<T, bool>> matchitem, int count);
-        IEnumerable<T> FindAllTake(int count);
-        Task<IEnumerable<T>> FindAllTakeAsync(int count);
-        T Get(int id);
-        Task<T> GetAsync(int id);
+        IEnumerable<T> Read<T>()where T : BaseEntity;
+        Task<IEnumerable<T>> ReadAsync<T>()where T : BaseEntity;
+        Boolean Exist<T>(Expression<Func<T, bool>> matchitem)where T : BaseEntity;
+        Task<Boolean> ExistAsync<T>(Expression<Func<T, bool>> matchitem)where T : BaseEntity;
+        T Find<T>(Expression<Func<T, bool>> matchitem)where T : BaseEntity; /*Single Item*/
+        Task<T> FindAsync<T>(Expression<Func<T, bool>> matchitem)where T : BaseEntity;
+        T FindInclude<T>(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria)where T : BaseEntity;
+        Task<T> FindIncludeAsync<T>(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria)where T : BaseEntity;
+        IEnumerable<T> FindAll<T>(Expression<Func<T, bool>> matchitem)where T : BaseEntity; /*Many Items*/
+        IEnumerable<T> FindAllInclude<T>(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria)where T : BaseEntity;/*Include Relationship of T*/
+        Task<IEnumerable<T>> FindAllIncludeAsync<T>(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria)where T : BaseEntity; /*Include Relationship of T*/
+        Task<IEnumerable<T>> FindAllAsync<T>(Expression<Func<T, bool>> matchitem)where T : BaseEntity;
+        IEnumerable<T> FindAllWhere<T>(Expression<Func<T, bool>> matchitem)where T : BaseEntity;
+        Task<IEnumerable<T>> FindAllWhereAsync<T>(Expression<Func<T, bool>> matchitem)where T : BaseEntity;
+        IEnumerable<T> FindAllWhereTake<T>(Expression<Func<T, bool>> matchitem, int count)where T : BaseEntity;
+        Task<IEnumerable<T>> FindAllWhereTakeAsync<T>(Expression<Func<T, bool>> matchitem, int count)where T : BaseEntity;
+        IEnumerable<T> FindAllTake<T>(int count)where T : BaseEntity;
+        Task<IEnumerable<T>> FindAllTakeAsync<T>(int count)where T : BaseEntity;
+        T Get<T>(int id)where T : BaseEntity;
+        Task<T> GetAsync<T>(int id)where T : BaseEntity;
         #endregion
         #region 'UPDATE'
-        T Update(T obj);
-        Task<T> UpdateAsync(T obj);
+        T Update<T>(T obj)where T : BaseEntity;
+        Task<T> UpdateAsync<T>(T obj)where T : BaseEntity;
         #endregion
         #region 'DELETE'
-        T Delete(T obj);
-        Task<T> DeleteAsync(T obj);
-        IEnumerable<T> DeleteRange(IEnumerable<T> obj);
-        Task<IEnumerable<T>> DeleteRangeAsync(IEnumerable<T> obj);
+        T Delete<T>(T obj)where T : BaseEntity;
+        Task<T> DeleteAsync<T>(T obj)where T : BaseEntity;
+        IEnumerable<T> DeleteRange<T>(IEnumerable<T> obj)where T : BaseEntity;
+        Task<IEnumerable<T>> DeleteRangeAsync<T>(IEnumerable<T> obj)where T : BaseEntity;
         #endregion
         #region 'COUNT'
-        int Count();
-        Task<int> CountAsync();
+        int Count<T>()where T : BaseEntity;
+        Task<int> CountAsync<T>()where T : BaseEntity;
         #endregion
         #region 'EXISTS'
-        Boolean Exists(Expression<Func<T, bool>> matchitem);
-        Task<Boolean> ExistsAsync(Expression<Func<T, bool>> matchitem);
+        Boolean Exists<T>(Expression<Func<T, bool>> matchitem)where T : BaseEntity;
+        Task<Boolean> ExistsAsync<T>(Expression<Func<T, bool>> matchitem)where T : BaseEntity;
         #endregion
     }
 }

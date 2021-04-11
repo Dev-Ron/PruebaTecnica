@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Core.Interfaces
 {
-    public interface IBussinessLogic<T> where T : BaseEntity
+    public interface IBussinessLogic
     {
     }
 }

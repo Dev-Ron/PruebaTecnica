@@ -6,10 +6,10 @@ using System.Text;
 
 namespace Core.UseCases
 {
-    public class BussinessLogic<T> : IBussinessLogic<T> where T : BaseEntity
+    public class BussinessLogic : IBussinessLogic
     {
-        private readonly IRepositorio<T> Repository;
-        public BussinessLogic(IRepositorio<T> Repository)
+        private readonly IRepositorio Repository;
+        public BussinessLogic(IRepositorio Repository)
         {
             this.Repository = Repository;
         }

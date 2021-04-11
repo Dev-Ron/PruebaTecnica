@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infracstructure.DataAccess
 {
-    public class Repositorio<T> : IRepositorio<T> where T : BaseEntity
+    public class Repositorio : IRepositorio
     {
         #region 'Components'
         protected PTContext _dbContext;
@@ -21,25 +21,25 @@ namespace Infracstructure.DataAccess
         #endregion
         #region 'Methods'
         #region 'CREATE'
-        public IEnumerable<T> AddRange(IEnumerable<T> obj)
+        public IEnumerable<T> AddRange<T>(IEnumerable<T> obj) where T : BaseEntity
         {
             _dbContext.Set<T>().AddRange(obj);
             _dbContext.SaveChanges();
             return obj;
         }
-        public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> obj)
+        public async Task<IEnumerable<T>> AddRangeAsync<T>(IEnumerable<T> obj) where T : BaseEntity
         {
             _dbContext.Set<T>().AddRange(obj);
             await _dbContext.SaveChangesAsync();
             return obj;
         }
-        public T Create(T obj)
+        public T Create<T>(T obj) where T : BaseEntity
         {
             _dbContext.Set<T>().Add(obj);
             _dbContext.SaveChanges();
             return obj;
         }
-        public async Task<T> CreateAsync(T obj)
+        public async Task<T> CreateAsync<T>(T obj) where T : BaseEntity
         {
             _dbContext.Set<T>().Add(obj);
             await _dbContext.SaveChangesAsync();
@@ -48,88 +48,88 @@ namespace Infracstructure.DataAccess
         #endregion
         #region 'READ'
 
-        public T Find(Expression<Func<T, bool>> matchitem)
+        public T Find<T>(Expression<Func<T, bool>> matchitem) where T : BaseEntity
         {
             return _dbContext.Set<T>().SingleOrDefault(matchitem);
         }
-        public async Task<T> FindAsync(Expression<Func<T, bool>> matchitem)
+        public async Task<T> FindAsync<T>(Expression<Func<T, bool>> matchitem) where T : BaseEntity
         {
             return await _dbContext.Set<T>().SingleOrDefaultAsync(matchitem);
         }
-        public T FindInclude(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria)
+        public T FindInclude<T>(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria) where T : BaseEntity
         {
             return _dbContext.Set<T>().Include(criteria).SingleOrDefault(matchitem);
         }
-        public async Task<T> FindIncludeAsync(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria)
+        public async Task<T> FindIncludeAsync<T>(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria) where T : BaseEntity
         {
             return await _dbContext.Set<T>().Include(criteria).SingleOrDefaultAsync(matchitem);
         }
-        public IEnumerable<T> FindAll(Expression<Func<T, bool>> matchitem)
+        public IEnumerable<T> FindAll<T>(Expression<Func<T, bool>> matchitem) where T : BaseEntity
         {
             return _dbContext.Set<T>().Where(matchitem).ToList();
         }
-        public async Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> matchitem)
+        public async Task<IEnumerable<T>> FindAllAsync<T>(Expression<Func<T, bool>> matchitem) where T : BaseEntity
         {
             return await _dbContext.Set<T>().Where(matchitem).ToListAsync();
         }
-        public IEnumerable<T> FindAllInclude(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria)
+        public IEnumerable<T> FindAllInclude<T>(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria) where T : BaseEntity
         {
             return _dbContext.Set<T>().Where(matchitem).Include(criteria).ToList();
         }
-        public async Task<IEnumerable<T>> FindAllIncludeAsync(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria)
+        public async Task<IEnumerable<T>> FindAllIncludeAsync<T>(Expression<Func<T, bool>> matchitem, Expression<Func<T, object>> criteria) where T : BaseEntity
         {
             return await _dbContext.Set<T>().Where(matchitem).Include(criteria).ToListAsync();
         }
-        public IEnumerable<T> FindAllTake(int count)
+        public IEnumerable<T> FindAllTake<T>(int count) where T : BaseEntity
         {
             return _dbContext.Set<T>().Take(count).ToList();
         }
-        public async Task<IEnumerable<T>> FindAllTakeAsync(int count)
+        public async Task<IEnumerable<T>> FindAllTakeAsync<T>(int count) where T : BaseEntity
         {
             return await _dbContext.Set<T>().Take(count).ToListAsync();
         }
-        public IEnumerable<T> FindAllWhere(Expression<Func<T, bool>> matchitem)
+        public IEnumerable<T> FindAllWhere<T>(Expression<Func<T, bool>> matchitem) where T : BaseEntity
         {
             return _dbContext.Set<T>().Where(matchitem).ToList();
         }
-        public async Task<IEnumerable<T>> FindAllWhereAsync(Expression<Func<T, bool>> matchitem)
+        public async Task<IEnumerable<T>> FindAllWhereAsync<T>(Expression<Func<T, bool>> matchitem) where T : BaseEntity
         {
             return await _dbContext.Set<T>().Where(matchitem).ToListAsync();
         }
-        public IEnumerable<T> FindAllWhereTake(Expression<Func<T, bool>> matchitem, int count)
+        public IEnumerable<T> FindAllWhereTake<T>(Expression<Func<T, bool>> matchitem, int count) where T : BaseEntity
         {
             return _dbContext.Set<T>().Where(matchitem).Take(count).ToList();
         }
-        public async Task<IEnumerable<T>> FindAllWhereTakeAsync(Expression<Func<T, bool>> matchitem, int count)
+        public async Task<IEnumerable<T>> FindAllWhereTakeAsync<T>(Expression<Func<T, bool>> matchitem, int count) where T : BaseEntity
         {
             return await _dbContext.Set<T>().Where(matchitem).Take(count).ToListAsync();
         }
-        public T Get(int id)
+        public T Get<T>(int id) where T : BaseEntity
         {
             return _dbContext.Set<T>().Find(id);
         }
-        public async Task<T> GetAsync(int id)
+        public async Task<T> GetAsync<T>(int id) where T : BaseEntity
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
-        public IEnumerable<T> Read()
+        public IEnumerable<T> Read<T>() where T : BaseEntity
         {
             return _dbContext.Set<T>().ToList();
         }
-        public async Task<IEnumerable<T>> ReadAsync()
+        public async Task<IEnumerable<T>> ReadAsync<T>() where T : BaseEntity
         {
             return await _dbContext.Set<T>().ToListAsync();
         }
         #endregion
         #region 'UPDATE'
-        public T Update(T obj)
+        public T Update<T>(T obj) where T : BaseEntity
         {
             T exist = _dbContext.Set<T>().Find(obj.Id);
             _dbContext.Entry(exist).CurrentValues.SetValues(obj); ;
             _dbContext.SaveChanges();
             return obj;
         }
-        public async Task<T> UpdateAsync(T obj)
+        public async Task<T> UpdateAsync<T>(T obj) where T : BaseEntity
         {
             T exist = _dbContext.Set<T>().Find(obj.Id);
             _dbContext.Entry(exist).CurrentValues.SetValues(obj);
@@ -139,26 +139,26 @@ namespace Infracstructure.DataAccess
         }
         #endregion
         #region 'DELETE'
-        public T Delete(T obj)
+        public T Delete<T>(T obj) where T : BaseEntity
         {
             _dbContext.Set<T>().Remove(obj);
             _dbContext.SaveChanges();
             return obj;
         }
-        public async Task<T> DeleteAsync(T obj)
+        public async Task<T> DeleteAsync<T>(T obj) where T : BaseEntity
         {
             T exist = _dbContext.Set<T>().Find(obj.Id);
             _dbContext.Set<T>().Remove(exist);
             await _dbContext.SaveChangesAsync();
             return obj;
         }
-        public IEnumerable<T> DeleteRange(IEnumerable<T> obj)
+        public IEnumerable<T> DeleteRange<T>(IEnumerable<T> obj) where T : BaseEntity
         {
             _dbContext.Set<T>().RemoveRange(obj);
             _dbContext.SaveChanges();
             return obj;
         }
-        public async Task<IEnumerable<T>> DeleteRangeAsync(IEnumerable<T> obj)
+        public async Task<IEnumerable<T>> DeleteRangeAsync<T>(IEnumerable<T> obj) where T : BaseEntity
         {
             _dbContext.Set<T>().RemoveRange(obj);
             await _dbContext.SaveChangesAsync();
@@ -166,29 +166,29 @@ namespace Infracstructure.DataAccess
         }
         #endregion
         #region 'COUNT'
-        public int Count()
+        public int Count<T>() where T : BaseEntity
         {
             return _dbContext.Set<T>().Count();
         }
-        public async Task<int> CountAsync()
+        public async Task<int> CountAsync<T>() where T : BaseEntity
         {
             return await _dbContext.Set<T>().CountAsync();
         }
         #endregion
         #region 'EXISTS'
-        public bool Exist(Expression<Func<T, bool>> matchitem) /*Using for Generic Repository*/
+        public bool Exist<T>(Expression<Func<T, bool>> matchitem) where T : BaseEntity /*Using for Generic Repository*/
         {
             return _dbContext.Set<T>().SingleOrDefault(matchitem) != null;
         }
-        public async Task<bool> ExistAsync(Expression<Func<T, bool>> matchitem)
+        public async Task<bool> ExistAsync<T>(Expression<Func<T, bool>> matchitem) where T : BaseEntity
         {
             return await _dbContext.Set<T>().SingleOrDefaultAsync(matchitem) != null;
         }
-        public bool Exists(Expression<Func<T, bool>> matchitem) /*Using for Manage Operations*/
+        public bool Exists<T>(Expression<Func<T, bool>> matchitem) where T : BaseEntity /*Using for Manage Operations*/
         {
             return _dbContext.Set<T>().SingleOrDefault(matchitem) != null;
         }
-        public async Task<bool> ExistsAsync(Expression<Func<T, bool>> matchitem)
+        public async Task<bool> ExistsAsync<T>(Expression<Func<T, bool>> matchitem) where T : BaseEntity
         {
             return await _dbContext.Set<T>().SingleOrDefaultAsync(matchitem) != null;
         }

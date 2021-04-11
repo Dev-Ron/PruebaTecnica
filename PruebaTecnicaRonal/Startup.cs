@@ -38,8 +38,8 @@ namespace PruebaTecnicaRonal
                 //options.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTION_STRING"));
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddScoped<IRepositorio<Libro>, Repositorio<Libro>>();
-            services.AddScoped<IBussinessLogic<Libro>, BussinessLogic<Libro>>();
+            services.AddScoped<IRepositorio, Repositorio>();
+            services.AddScoped<IBussinessLogic, BussinessLogic>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
