@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DevExpress.Xpo" Version="19.2.5" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+  </ItemGroup>
+
 </Project>

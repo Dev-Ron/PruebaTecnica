@@ -20,27 +20,44 @@ namespace PruebaTecnicaRonal.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IRepositorio _repositorio;
+        private readonly IBussinessLogic CapaLogica;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IRepositorio repositorio)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IRepositorio repositorio, IBussinessLogic _CapaLogica)
         {
             _logger = logger;
             _repositorio = repositorio;
+            CapaLogica = _CapaLogica;
         }
 
         [HttpGet]
-        public IEnumerable<Libro> Get()
+        public IEnumerable<Autor> Get()
         {
-            IEnumerable<Libro> Libros;
+            IEnumerable<Autor> Autores;
             try
             {
-                
-                Libros = _repositorio.Read<Libro>();
-
+                Autores = _repositorio.FindAllInclude<Autor>(r => r.libro != null, r => r.libro);
             }catch(Exception e)
             {
-                Libros = null;
+                Autores = null;
             }
-            return Libros;
+            return Autores;
         }
+
+        [HttpPost("Sincronizar")]
+        public IEnumerable<Autor> OnPostSincronizar()
+        {
+            IEnumerable<Autor> Autores;
+            try
+            {
+                List<Libro> libros = CapaLogica.ConsultarLibrosApi();
+                Autores = CapaLogica.ConsultarAutoresApi(libros);
+            }
+            catch (Exception e)
+            {
+                Autores = null;
+            }
+            return Autores;
+        }
+
     }
 }

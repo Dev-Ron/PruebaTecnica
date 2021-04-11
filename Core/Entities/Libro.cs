@@ -11,6 +11,6 @@ namespace Core.Entities
         public int pageCount { get; set; }
         public string excerpt { get; set; }
         public DateTime publishDate { get; set; }
-
+        public int IdApi { get; set; }
     }
 }

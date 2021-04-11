@@ -7,5 +7,11 @@ namespace Core.Interfaces
 {
     public interface IBussinessLogic
     {
+        public User CrearUsuario(User user);
+
+        public User ObtenerUsuario(string username);
+        public List<Libro> ConsultarLibrosApi();
+
+        public List<Autor> ConsultarAutoresApi(List<Libro> Libros);
     }
 }

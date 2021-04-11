@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PruebaTecnicaRonal.ViewModels
 {
-    public class User
+    public class UserVM
     {
         public string userName { get; set; }
         public string password { get; set; }

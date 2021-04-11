@@ -12,6 +12,7 @@ namespace Infracstructure.DataAccess
 
         public DbSet<Autor> Autor { get; set; }
         public DbSet<Libro> Libro { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }
 

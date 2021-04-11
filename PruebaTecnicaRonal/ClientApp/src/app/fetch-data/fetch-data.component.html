@@ -1,24 +1,30 @@
-<h1 id="tableLabel">Weather forecast</h1>
+<h1 id="tableLabel">Consulta de Libros</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p>Este componente muestra los libros desde el servidor, si sincroniza se mostrarán tambien los de la api</p>
 
-<p *ngIf="!libros"><em>Loading...</em></p>
+<button type="button" (click)="onSincronizar()" class="btn btn-success">Sincronizar</button>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="libros">
+<p *ngIf="!libros"><em></em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="autores">
   <thead>
     <tr>
-      <th>Date</th>
-      <th>Temp. (C)</th>
-      <th>Temp. (F)</th>
-      <th>Summary</th>
+      <th>Nombre Autor</th>
+      <th>Apellido Autor</th>
+      <th>Libro</th>
+      <th>Fecha de publicación</th>
+      <th>Descripción</th>
+      <th>Numero de paginas</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let libros of libros">
-      <td>{{ libros.title }}</td>
-      <td>{{ libros.description }}</td>
-      <td>{{ libros.publishDate }}</td>
-      <td>{{ libros.pageCount }}</td>
+    <tr *ngFor="let autores of autores">
+      <td>{{ autores.firstName }}</td>
+      <td>{{ autores.lastName }}</td>
+      <td>{{ autores.libro.title }}</td>
+      <td>{{ autores.libro.publishDate }}</td>
+      <td>{{ autores.libro.description }}</td>
+      <td>{{ autores.libro.pageCount }}</td>
     </tr>
   </tbody>
 </table>
