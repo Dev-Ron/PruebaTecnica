@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap  } from '@angular/router';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import * as jwt from 'jsonwebtoken';
+
 
 @Component({
   selector: 'app-root',
