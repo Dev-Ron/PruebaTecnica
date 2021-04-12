@@ -80,6 +80,8 @@ namespace Core.UseCases
                 }));
             }
 
+            Repository.AddRange<Libro>(libros);
+            Repository.AddRange<Autor>(autores);
             return autores;
         }
 

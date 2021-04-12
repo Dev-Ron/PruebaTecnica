@@ -42,24 +42,13 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     BrowserModule,
     FormsModule,
-    //TableModule,
-    //CalendarModule,
-    //SliderModule,
-    //DialogModule,
-    //MultiSelectModule,
-    //ContextMenuModule,
-    //DropdownModule,
-    //ButtonModule,
-    //ToastModule,
-    //InputTextModule,
-    //ProgressBarModule,
-    //TabViewModule,
-    //CodeHighlighterModule,
+    
     RouterModule.forRoot([
     { path: '', component: HomeComponent, pathMatch: 'full' },
     { path: 'counter', component: CounterComponent },
     { path: 'fetch-data', component: FetchDataComponent },
-], { relativeLinkResolution: 'legacy' })
+    ], { relativeLinkResolution: 'legacy' })
+    //, TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -36,7 +36,7 @@ export class HomeComponent {
     console.log(this.checkoutForm.value);
 
     this.http.post('https://localhost:44325/login', this.checkoutForm.value, { responseType: 'json' }).subscribe(result => {
-      console.log(result);
+    
       localStorage.setItem('JWT', JSON.stringify(result));
       this.router.navigate(['/fetch-data'], { relativeTo: this.route });
     }, error => {

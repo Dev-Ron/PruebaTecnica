@@ -94,6 +94,8 @@ namespace PruebaTecnicaRonal
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
+            app.UseAuthentication();
+
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,

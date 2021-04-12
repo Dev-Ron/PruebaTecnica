@@ -1,30 +1,56 @@
+<style>
+  .Separado {
+    margin-top: 10px;
+    margin-right: 20px;
+  }
+</style>
+
 <h1 id="tableLabel">Consulta de Libros</h1>
 
 <p>Este componente muestra los libros desde el servidor, si sincroniza se mostrarán tambien los de la api</p>
 
-<button type="button" (click)="onSincronizar()" class="btn btn-success">Sincronizar</button>
+<button type="button" (click)="onSincronizar()" style="margin-right:20px;" class="btn btn-success">Sincronizar registros API</button>
+<button type="button" (click)="onEliminar()" class="btn btn-danger">Eliminar todos los registros locales</button>
+
+<div class="container">
+  <div >
+    <form class="form-group row" [formGroup]="checkoutFormFiltro" (ngSubmit)="onSubmit($event)">
+      <label class="col-md-12 Separado" for="exampleFormControlSelect1">Seleccione la columna a filtrar</label>
+      <select class="form-control col-md-3 Separado" formControlName="Campo" id="exampleFormControlSelect1">
+        <option *ngFor="let col of cols">
+          {{col.header}}
+        </option>
+      </select>
+      <input type="text" formControlName="Busqueda" class="form-control col-md-3 Separado" id="Busqueda" placeholder="Busqueda...">
+      <button type="submit" class="btn btn-primary col-md-3 Separado">Filtrar</button>
+    </form>
+  </div>
+</div>
+
 
 <p *ngIf="!libros"><em></em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="autores">
+<table class='table table-dark table-striped' aria-labelledby="tableLabel" *ngIf="autores">
   <thead>
     <tr>
-      <th>Nombre Autor</th>
-      <th>Apellido Autor</th>
-      <th>Libro</th>
-      <th>Fecha de publicación</th>
-      <th>Descripción</th>
-      <th>Numero de paginas</th>
+      <th *ngFor="let col of cols">
+        {{col.header}}
+      </th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let autores of autores">
+
+      <td>{{ autores.libro.title }}</td>
       <td>{{ autores.firstName }}</td>
       <td>{{ autores.lastName }}</td>
-      <td>{{ autores.libro.title }}</td>
-      <td>{{ autores.libro.publishDate }}</td>
-      <td>{{ autores.libro.description }}</td>
       <td>{{ autores.libro.pageCount }}</td>
+      <td>{{ autores.libro.description }}</td>
+      <td>{{ autores.libro.publishDate }}</td>
     </tr>
   </tbody>
 </table>
+
+
+
+
