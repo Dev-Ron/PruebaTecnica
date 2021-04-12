@@ -102,7 +102,7 @@ namespace PruebaTecnica.Controllers
             catch (Exception e)
             {
                 Response.StatusCode = StatusCodes.Status500InternalServerError;
-                return new JsonResult(e.Message);
+                return new JsonResult(e);
             }
         }
 

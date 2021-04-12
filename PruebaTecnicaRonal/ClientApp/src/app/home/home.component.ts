@@ -35,7 +35,7 @@ export class HomeComponent {
     event.preventDefault();
     console.log(this.checkoutForm.value);
 
-    this.http.post(this.baseUrl + 'login', this.checkoutForm.value, { responseType: 'json' }).subscribe(result => {
+    this.http.post('/login', this.checkoutForm.value).subscribe(result => {
     
       localStorage.setItem('JWT', JSON.stringify(result));
       this.router.navigate(['/fetch-data'], { relativeTo: this.route });
