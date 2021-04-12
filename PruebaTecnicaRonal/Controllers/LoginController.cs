@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
-using PruebaTecnicaRonal.ViewModels;
+using PruebaTecnica.ViewModels;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -14,9 +14,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using static PruebaTecnicaRonal.Helper;
+using static PruebaTecnica.Helper;
 
-namespace PruebaTecnicaRonal.Controllers
+namespace PruebaTecnica.Controllers
 {
 
     [ApiController]

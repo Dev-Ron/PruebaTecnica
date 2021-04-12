@@ -1,6 +1,6 @@
 using System;
 
-namespace PruebaTecnicaRonal
+namespace PruebaTecnica
 {
     public class WeatherForecast
     {

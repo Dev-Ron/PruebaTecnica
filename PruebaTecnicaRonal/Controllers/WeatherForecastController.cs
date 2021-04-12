@@ -3,13 +3,13 @@ using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PruebaTecnicaRonal.ViewModels;
+using PruebaTecnica.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PruebaTecnicaRonal.Controllers
+namespace PruebaTecnica.Controllers
 {
     
     [ApiController]

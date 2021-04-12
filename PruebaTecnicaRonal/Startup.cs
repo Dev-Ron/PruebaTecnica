@@ -17,7 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace PruebaTecnicaRonal
+namespace PruebaTecnica
 {
     public class Startup
     {
