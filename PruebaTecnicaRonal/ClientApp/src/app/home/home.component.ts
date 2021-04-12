@@ -19,7 +19,7 @@ export class HomeComponent {
     private route: ActivatedRoute,
 
 
-    @Inject('BASE_URL') baseUrl: string
+    @Inject('BASE_URL') private baseUrl: string
   ) {
 
   }
@@ -35,7 +35,7 @@ export class HomeComponent {
     event.preventDefault();
     console.log(this.checkoutForm.value);
 
-    this.http.post('https://localhost:44325/login', this.checkoutForm.value, { responseType: 'json' }).subscribe(result => {
+    this.http.post(this.baseUrl + 'login', this.checkoutForm.value, { responseType: 'json' }).subscribe(result => {
     
       localStorage.setItem('JWT', JSON.stringify(result));
       this.router.navigate(['/fetch-data'], { relativeTo: this.route });
