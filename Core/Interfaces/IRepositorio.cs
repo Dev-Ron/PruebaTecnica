@@ -46,8 +46,10 @@ namespace Core.Interfaces
         Task<T> DeleteAsync<T>(T obj)where T : BaseEntity;
         IEnumerable<T> DeleteRange<T>(IEnumerable<T> obj)where T : BaseEntity;
         Task<IEnumerable<T>> DeleteRangeAsync<T>(IEnumerable<T> obj)where T : BaseEntity;
+
+        void DeletaAllRows<T>() where T : BaseEntity;
         #endregion
-        #region 'COUNT'
+            #region 'COUNT'
         int Count<T>()where T : BaseEntity;
         Task<int> CountAsync<T>()where T : BaseEntity;
         #endregion

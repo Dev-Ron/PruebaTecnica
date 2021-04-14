@@ -16,11 +16,7 @@ namespace PruebaTecnica.Controllers
     [Route("[controller]")]
     public class LibrosController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
+        
         private readonly ILogger<LibrosController> _logger;
         private readonly IRepositorio _repositorio;
         private readonly IBussinessLogic CapaLogica;
@@ -29,7 +25,7 @@ namespace PruebaTecnica.Controllers
         {
             _logger = logger;
             _repositorio = repositorio;
-            CapaLogica = _CapaLogica;
+            CapaLogica = _CapaLogica; 
         }
 
         [HttpGet]
@@ -51,32 +47,7 @@ namespace PruebaTecnica.Controllers
             IEnumerable<Autor> Autores;
             try
             {
-                switch (filtro.Campo)
-                {
-                    case "Titulo":
-                        Autores = await _repositorio.FindAllIncludeAsync<Autor>(r => r.libro.title.Contains(filtro.Busqueda), r => r.libro);
-                        break;
-                    case "Descripción":
-                        Autores = await _repositorio.FindAllIncludeAsync<Autor>(r => r.libro.description.Contains(filtro.Busqueda), r => r.libro);
-                        break;
-                    case "Número de paginas":
-                        Autores = await _repositorio.FindAllIncludeAsync<Autor>(r => r.libro.pageCount == Convert.ToInt32(filtro.Busqueda), r => r.libro);
-                        break;
-                    case "Nombre autor":
-                        Autores = await _repositorio.FindAllIncludeAsync<Autor>(r => r.firstName.Contains(filtro.Busqueda), r => r.libro);
-                        break;
-                    case "Apellido autor":
-                        Autores = await _repositorio.FindAllIncludeAsync<Autor>(r => r.lastName.Contains(filtro.Busqueda), r => r.libro);
-                        break;
-                    case "Fecha de publicación":
-                        Autores = await _repositorio.FindAllIncludeAsync<Autor>(r => r.libro.publishDate.Date == Convert.ToDateTime(filtro.Busqueda), r => r.libro);
-                        break;
-                    default:
-                        Autores = null;
-                        break;
-                } 
-
-                
+                Autores = await CapaLogica.ConsultarAutoresFiltro(filtro.Campo, filtro.Busqueda);
             }
             catch (Exception e)
             {
@@ -107,8 +78,7 @@ namespace PruebaTecnica.Controllers
             IEnumerable<Autor> Autores;
             try
             {
-                _repositorio.DeleteRange<Autor>(_repositorio.FindAll<Autor>(s => s.Id != 0));
-                _repositorio.DeleteRange<Libro>(_repositorio.FindAll<Libro>(s => s.Id != 0));
+                CapaLogica.BorrarRegistros();
             }
             catch (Exception e)
             {

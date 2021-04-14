@@ -1,9 +1,12 @@
 import { Component, Inject, NgModule } from '@angular/core';
 import { HttpClient, HttpInterceptor, HttpHandler, HttpRequest, HttpEvent } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-
-
+import { exportDataGrid } from "devextreme/exporter";
+import { Workbook } from 'exceljs';
+import saveAs from 'file-saver';
+import { locale, loadMessages } from "devextreme/localization";
+import esMessages from "devextreme/localization/messages/es.json";
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-fetch-data',
@@ -16,63 +19,86 @@ export class FetchDataComponent {
   filterValue: Array<any>;
   customOperations: Array<any>;
   popupPosition: any;
+  saleAmountHeaderFilter: any;
+  applyFilterTypes: any;
+  currentFilter: any;
+  showFilterRow: boolean;
+  showHeaderFilter: boolean;
+
   cols: any[];
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string)
   {
+   
+   
+      this.onCargarGrid();
+
+
+    
+    loadMessages(esMessages);
+    locale(navigator.language);
+
   
-
-
-    http.get<autores[]>(baseUrl + 'libros' ).subscribe(result => {
-      this.autores = result;
-    }, error => console.error(error));
-
-    this.cols = [
-      { field: 'title', header: 'Titulo' },
-      { field: 'firstName', header: 'Nombre autor' },
-      { field: 'lastName', header: 'Apellido autor' },
-      { field: 'pageCount', header: 'Número de paginas' },
-      { field: 'description', header: 'Descripción' },
-      { field: 'publishDate', header: 'Fecha de publicación' }
-    ];
+    this.showFilterRow = true;
+    this.showHeaderFilter = true;
+    this.applyFilterTypes = [{
+      key: "auto",
+      name: "Immediately"
+    }, {
+      key: "onClick",
+      name: "On Button Click"
+    }];
   }
-  
+
+  onExporting(e) {
+    const workbook = new Workbook.Workbook();
+    const worksheet = workbook.addWorksheet('Employees');
+
+    exportDataGrid({
+      component: e.component,
+      worksheet: worksheet,
+      autoFilterEnabled: true
+    }).then(() => {
+      workbook.xlsx.writeBuffer().then((buffer) => {
+        saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
+      });
+    });
+    e.cancel = true;
+  }
+
   onSincronizar() {
-    const token = localStorage.getItem('JWT');
+    document.getElementById("SincronizarCargando").style.display = "block";
     this.http.post<autores[]>(this.baseUrl + 'libros/Sincronizar', { responseType: 'json' }).subscribe(result => {
-      this.autores = result;
+      document.getElementById("SincronizarCargando").style.display = "none";
+      this.onCargarGrid();
     }, error => {
-      console.error(error);
+        document.getElementById("SincronizarCargando").style.display = "none";
+        document.getElementById("CargandoGrid").style.display = "inline-block";
+        this.onCargarGrid();
     });
   }
 
   onEliminar() {
-    const token = localStorage.getItem('JWT');
+    document.getElementById("EliminarCargando").style.display = "block";
     this.http.delete(this.baseUrl + 'libros/Eliminar').subscribe(result => {
-      this.autores = [];
+      document.getElementById("EliminarCargando").style.display = "none";
+      this.onCargarGrid();
       }, error => {
         console.error(error);
+        document.getElementById("EliminarCargando").style.display = "none";
+        this.onCargarGrid();
       });
   }
 
-  checkoutFormFiltro = this.formBuilder.group({
-    Campo: '',
-    Busqueda: ''
-  });
-
-  onSubmit(event: Event): void {
-    const token = localStorage.getItem('JWT');
-    event.preventDefault();
-    console.log(this.checkoutFormFiltro.value);
-    this.http.post<autores[]>(this.baseUrl + 'libros/ConsultarFiltro', this.checkoutFormFiltro.value ).subscribe(result => {
+  onCargarGrid() {
+    
+    this.http.get<autores[]>(this.baseUrl + 'libros').subscribe(result => {
       this.autores = result;
-    }, error => {
-      console.error(error);
-    });
+      document.getElementById("CargandoGrid").style.display = "none";
+    }, error => console.error(error));
   }
-
 }
 
 

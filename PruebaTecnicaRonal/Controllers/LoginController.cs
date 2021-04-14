@@ -32,31 +32,24 @@ namespace PruebaTecnica.Controllers
             CapaLogica = _CapaLogica;
         }
 
-
+        /// <summary>
+        /// Metodo que autentica un usuario de la api y le da un JWT
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult OnPost(UserVM user)
         {
-            List<UserVM> UsuariosApi = new List<UserVM>();
+            List<User> UsuariosApi = new List<User>();
             try
             {
-                RestClient client = new RestClient(Environment.GetEnvironmentVariable("API_PRUEBA") + "api/v1/Users/");
-                client.Timeout = 10000;
-                RestRequest request = new RestRequest(Method.GET);
-                request.AddHeader("Content-Type", "application/json");
-                request.AddHeader("Accept", "application/json");
-                IRestResponse response = client.Execute(request);
-
-                if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                {
-                    UsuariosApi = JsonConvert.DeserializeObject<List<UserVM>>(response.Content);
-                }
-
-                if(UsuariosApi.Any(r => r.userName == user.userName))
+                UsuariosApi = CapaLogica.ConsultarUsuariosApi();
+                if(UsuariosApi.Any(r => r.Usuario == user.userName))
                 {
                     User usuarioBase = new User();
                     if (CapaLogica.ObtenerUsuario(user.userName) == null)
                     {
-                        UserVM userAPI = UsuariosApi.FirstOrDefault(r => r.userName == user.userName);
+                        User userAPI = UsuariosApi.FirstOrDefault(r => r.Usuario == user.userName);
                         usuarioBase = CrearUser(userAPI);
                     }
                     else
@@ -64,7 +57,6 @@ namespace PruebaTecnica.Controllers
                        usuarioBase = CapaLogica.ObtenerUsuario(user.userName);
                     }
                     
-
                     if (HashHelper.CheckHash(user.password, usuarioBase.Clave, usuarioBase.Sal))
                     {
                         var bearer_tokenJWT = GenerarToken(user);
@@ -96,13 +88,10 @@ namespace PruebaTecnica.Controllers
             string ValidIssuer = config.GetValue<string>("Issuer");
             string ValidAudience = config.GetValue<string>("Audience");
             SymmetricSecurityKey IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetValue<string>("SecretKey")));
-
-            //La fecha de expiracion sera el mismo dia a las 12 de la noche
             DateTime dtFechaExpiraToken;
             DateTime now = DateTime.Now;
             dtFechaExpiraToken = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59, 999);
 
-            //Agregamos los claim nuestros
             var claims = new[]
             {
                 new Claim(Constantes.JWT_CLAIM_USUARIO, login.userName)
@@ -119,17 +108,16 @@ namespace PruebaTecnica.Controllers
             );
         }
 
-        // GET: LoginController
         public ActionResult OnGet()
         {
             return StatusCode(StatusCodes.Status200OK, "");
         }
 
-        private User CrearUser(UserVM usuarionuevo)
+        private User CrearUser(User usuarionuevo)
         {
-            HashedPassword Password = HashHelper.Hash(usuarionuevo.password);
+            HashedPassword Password = HashHelper.Hash(usuarionuevo.Clave);
             User user = new User();
-            user.Usuario = usuarionuevo.userName;
+            user.Usuario = usuarionuevo.Usuario;
             user.Clave = Password.Password;
             user.Sal = Password.Salt;
             CapaLogica.CrearUsuario(user);

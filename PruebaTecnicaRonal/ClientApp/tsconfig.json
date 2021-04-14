@@ -3,6 +3,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "module": "esnext",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -32,6 +34,15 @@
       ],
       "jszip": [
         "node_modules/jszip/dist/jszip.min.js"
+      ],
+      "exceljs": [
+        "node_modules/exceljs/dist/exceljs.js"
+      ],
+      "file-saver": [
+        "node_modules/file-saver/src/FileSaver.js"
+      ],
+      "EsMessages": [
+        "devextreme/localization/messages/es.json"
       ]
     }
   }

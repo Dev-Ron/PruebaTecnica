@@ -139,6 +139,13 @@ namespace Infracstructure.DataAccess
         }
         #endregion
         #region 'DELETE'
+
+        public void DeletaAllRows<T>() where T : BaseEntity
+        {
+            _dbContext.RemoveRange(_dbContext.Set<T>());
+            _dbContext.SaveChanges();
+        }
+
         public T Delete<T>(T obj) where T : BaseEntity
         {
             _dbContext.Set<T>().Remove(obj);

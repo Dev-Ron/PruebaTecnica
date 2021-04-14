@@ -14,7 +14,11 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common';
 import { JwtInterceptor } from './Services/auth/jwt-interceptor';
 
-import { DxButtonModule, DxDataGridModule } from 'devextreme-angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ToastrModule } from 'ngx-toastr';
+
+import { DxButtonModule, DxDataGridModule, DxPivotGridModule } from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -26,12 +30,12 @@ import { DxButtonModule, DxDataGridModule } from 'devextreme-angular';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
+    HttpClientModule, ToastrModule.forRoot(), BrowserAnimationsModule,
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
     BrowserModule,
-    FormsModule,
+    FormsModule, DxPivotGridModule,
     DxButtonModule, DxDataGridModule,
     RouterModule.forRoot([
     { path: '', component: HomeComponent, pathMatch: 'full' },
