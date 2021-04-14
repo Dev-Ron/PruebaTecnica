@@ -1,56 +1,41 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap  } from '@angular/router';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { Security } from './services/security';
+import { Subscription } from 'rxjs';
+import { Data } from 'src/app/services/data';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent {
-  title = 'app';
 
-  
+export class AppComponent implements OnDestroy {
+  IsAuthenticated = false;
+  title = 'Prueba Tecnica 2.0';
+  private subsAuth$: Subscription;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private http: HttpClient,
-    private router: Router,
-    private route: ActivatedRoute,
-
-
-    @Inject('BASE_URL') baseUrl: string
+    private securityService: Security,
+    private dataService: Data,
   ) {
+    this.IsAuthenticated = this.securityService.IsAuthorized;
 
+    // Nos suscribimos al observador de los eventos de auth.
+    this.subsAuth$ = this.securityService.authChallenge$.subscribe(
+      (isAuth) => {
+        this.IsAuthenticated = isAuth;
+      });
   }
 
-  checkoutForm = this.formBuilder.group({
-    userName: '',
-    password: ''
-  });
-
-
-
-  onSubmit(event: Event): void {
-    event.preventDefault();
-    console.log(this.checkoutForm.value);
-
-    this.http.post('https://localhost:44325/login', this.checkoutForm.value).subscribe(result => {
-      console.log(result);
-
-
-    }, error => {
-        console.error(error);
-        this.router.navigate(['/fetch-data'], { relativeTo: this.route });
-    });
-
-    this.checkoutForm.reset();
+  ngOnDestroy() {
+    if (this.subsAuth$) {
+      this.subsAuth$.unsubscribe();
+    }
   }
+
+
 }
-
-
-
-
-

@@ -11,21 +11,21 @@ using System.Threading.Tasks;
 
 namespace PruebaTecnica.Controllers
 {
-    
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class LibrosController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<LibrosController> _logger;
         private readonly IRepositorio _repositorio;
         private readonly IBussinessLogic CapaLogica;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IRepositorio repositorio, IBussinessLogic _CapaLogica)
+        public LibrosController(ILogger<LibrosController> logger, IRepositorio repositorio, IBussinessLogic _CapaLogica)
         {
             _logger = logger;
             _repositorio = repositorio;

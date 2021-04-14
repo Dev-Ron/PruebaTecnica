@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   selector: 'app-fetch-data',
   templateUrl: './fetch-data.component.html'
 })
-export class FetchDataComponent implements HttpInterceptor {
+export class FetchDataComponent {
   public autores: autores[];
   cols: any[];
   constructor(
@@ -17,8 +17,8 @@ export class FetchDataComponent implements HttpInterceptor {
     @Inject('BASE_URL') private baseUrl: string)
   {
     const token = localStorage.getItem('JWT');
-    http.get<autores[]>(baseUrl + 'weatherforecast', { responseType: 'json', headers: { Authorization: `Bearer ${token}` } }).subscribe(result => {
-      console.log(result);
+    http.get<autores[]>(baseUrl + 'libros' ).subscribe(result => {
+     
       this.autores = result;
     }, error => console.error(error));
 
@@ -31,22 +31,10 @@ export class FetchDataComponent implements HttpInterceptor {
       { field: 'publishDate', header: 'Fecha de publicación' }
     ];
   }
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('JWT');
-    req = req.clone({
-      url: req.url,
-      setHeaders: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    return next.handle(req);
-  }
-
-
+  
   onSincronizar() {
     const token = localStorage.getItem('JWT');
-    this.http.post<autores[]>(this.baseUrl + 'weatherforecast/Sincronizar',
-      { responseType: 'json', headers: { Authorization: `Bearer ${token}` } }).subscribe(result => {
+    this.http.post<autores[]>(this.baseUrl + 'libros/Sincronizar', { responseType: 'json' }).subscribe(result => {
       this.autores = result;
     }, error => {
       console.error(error);
@@ -55,7 +43,7 @@ export class FetchDataComponent implements HttpInterceptor {
 
   onEliminar() {
     const token = localStorage.getItem('JWT');
-    this.http.delete(this.baseUrl + 'weatherforecast/Eliminar').subscribe(result => {
+    this.http.delete(this.baseUrl + 'libros/Eliminar').subscribe(result => {
       this.autores = [];
       }, error => {
         console.error(error);
@@ -71,7 +59,7 @@ export class FetchDataComponent implements HttpInterceptor {
     const token = localStorage.getItem('JWT');
     event.preventDefault();
     console.log(this.checkoutFormFiltro.value);
-    this.http.post<autores[]>(this.baseUrl + 'weatherforecast/ConsultarFiltro', this.checkoutFormFiltro.value, { responseType: 'json', headers: { Authorization: `Bearer ${token}` } }).subscribe(result => {
+    this.http.post<autores[]>(this.baseUrl + 'libros/ConsultarFiltro', this.checkoutFormFiltro.value ).subscribe(result => {
       this.autores = result;
     }, error => {
       console.error(error);

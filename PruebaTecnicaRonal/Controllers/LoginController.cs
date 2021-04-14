@@ -67,23 +67,8 @@ namespace PruebaTecnica.Controllers
 
                     if (HashHelper.CheckHash(user.password, usuarioBase.Clave, usuarioBase.Sal))
                     {
-                        var secretKey = config.GetValue<string>("SecretKey");
-                        var key = Encoding.ASCII.GetBytes(secretKey);
-
-                        var claims = new ClaimsIdentity();
-                        claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.userName));
-
-                        var tokenDescriptor = new SecurityTokenDescriptor
-                        {
-                            Subject = claims,
-                            Expires = DateTime.UtcNow.AddHours(4),
-                            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-                        };
-
-                        var tokenHandler = new JwtSecurityTokenHandler();
-                        var createdToken = tokenHandler.CreateToken(tokenDescriptor);
-
-                        string bearer_token = tokenHandler.WriteToken(createdToken);
+                        var bearer_tokenJWT = GenerarToken(user);
+                        string bearer_token = new JwtSecurityTokenHandler().WriteToken(bearer_tokenJWT);
                         return new JsonResult(bearer_token);
                     }
                     else
@@ -104,6 +89,34 @@ namespace PruebaTecnica.Controllers
                 Response.StatusCode = StatusCodes.Status500InternalServerError;
                 return new JsonResult(e);
             }
+        }
+
+        private JwtSecurityToken GenerarToken(UserVM login)
+        {
+            string ValidIssuer = config.GetValue<string>("Issuer");
+            string ValidAudience = config.GetValue<string>("Audience");
+            SymmetricSecurityKey IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetValue<string>("SecretKey")));
+
+            //La fecha de expiracion sera el mismo dia a las 12 de la noche
+            DateTime dtFechaExpiraToken;
+            DateTime now = DateTime.Now;
+            dtFechaExpiraToken = new DateTime(now.Year, now.Month, now.Day, 23, 59, 59, 999);
+
+            //Agregamos los claim nuestros
+            var claims = new[]
+            {
+                new Claim(Constantes.JWT_CLAIM_USUARIO, login.userName)
+            };
+
+            return new JwtSecurityToken
+            (
+                issuer: ValidIssuer,
+                audience: ValidAudience,
+                claims: claims,
+                expires: dtFechaExpiraToken,
+                notBefore: now,
+                signingCredentials: new SigningCredentials(IssuerSigningKey, SecurityAlgorithms.HmacSha256)
+            );
         }
 
         // GET: LoginController

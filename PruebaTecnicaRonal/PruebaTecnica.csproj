@@ -32,7 +32,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\Services\auth\auth-guard.ts" />
+    <None Remove="ClientApp\src\app\Services\data.ts" />
+    <None Remove="ClientApp\src\app\Services\auth\jwt-interceptor.ts" />
+    <None Remove="ClientApp\src\app\Services\security.ts" />
+    <None Remove="ClientApp\src\app\Services\storage.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Infracstructure\Infracstructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\Services\auth\auth-guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\data.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\auth\jwt-interceptor.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\security.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\storage.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

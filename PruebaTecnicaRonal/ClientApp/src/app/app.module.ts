@@ -12,6 +12,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common';
+import { JwtInterceptor } from './Services/auth/jwt-interceptor';
 //import { TableModule } from 'primeng/table';
 //import { SliderModule } from 'primeng/slider';
 //import { MultiSelectModule } from 'primeng/multiselect';
@@ -50,7 +51,12 @@ import { CommonModule } from '@angular/common';
     ], { relativeLinkResolution: 'legacy' })
     //, TableModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
