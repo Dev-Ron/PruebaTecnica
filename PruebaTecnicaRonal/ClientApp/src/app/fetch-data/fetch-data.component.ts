@@ -1,24 +1,31 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, NgModule } from '@angular/core';
 import { HttpClient, HttpInterceptor, HttpHandler, HttpRequest, HttpEvent } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { BrowserModule } from '@angular/platform-browser';
+
 
 
 @Component({
   selector: 'app-fetch-data',
   templateUrl: './fetch-data.component.html'
 })
+
 export class FetchDataComponent {
   public autores: autores[];
+  dataSource: any;
+  filterValue: Array<any>;
+  customOperations: Array<any>;
+  popupPosition: any;
   cols: any[];
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
     @Inject('BASE_URL') private baseUrl: string)
   {
-    const token = localStorage.getItem('JWT');
+  
+
+
     http.get<autores[]>(baseUrl + 'libros' ).subscribe(result => {
-     
       this.autores = result;
     }, error => console.error(error));
 
@@ -67,6 +74,8 @@ export class FetchDataComponent {
   }
 
 }
+
+
 
 interface autores {
   libro: libro;

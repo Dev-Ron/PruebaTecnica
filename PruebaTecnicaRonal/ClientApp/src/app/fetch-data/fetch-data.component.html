@@ -12,8 +12,39 @@
 <button type="button" (click)="onSincronizar()" style="margin-right:20px;" class="btn btn-success">Sincronizar registros API</button>
 <button type="button" (click)="onEliminar()" class="btn btn-danger">Eliminar todos los registros locales</button>
 
-<div class="container">
-  <div >
+<dx-data-grid id="gridContainer"
+              [dataSource]="autores"
+              [columns]="columns"
+              [filterValue]="filterValue"
+              (onInitialized)="onInitialized($event)"
+              [showBorders]="true">
+  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+  <dxo-filter-builder [customOperations]="customOperations"
+                      [allowHierarchicalFields]="true">
+  </dxo-filter-builder>
+  <dxo-filter-builder-popup [position]="popupPosition">
+  </dxo-filter-builder-popup>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-scrolling mode="infinite"></dxo-scrolling>
+  <dxi-column dataField="firstName"
+              caption="Invoice Number"
+              dataType="text">
+    <dxo-header-filter [groupInterval]="10000"></dxo-header-filter>
+  </dxi-column>
+  <dxi-column dataField="OrderDate" dataType="date"></dxi-column>
+  <dxi-column dataField="SaleAmount" format="currency" dataType="number">
+    <dxo-header-filter [dataSource]="saleAmountHeaderFilter"></dxo-header-filter>
+  </dxi-column>
+  <dxi-column dataField="Employee" dataType="string"></dxi-column>
+  <dxi-column dataField="CustomerInfo.StoreCity" caption="City" dataType="string"></dxi-column>
+  <dxi-column dataField="CustomerInfo.StoreState" caption="State" dataType="string"></dxi-column>
+</dx-data-grid>
+
+
+
+<!--<div class="container">
+  <div>
     <form class="form-group row" [formGroup]="checkoutFormFiltro" (ngSubmit)="onSubmit($event)">
       <label class="col-md-12 Separado" for="exampleFormControlSelect1">Seleccione la columna a filtrar</label>
       <select class="form-control col-md-3 Separado" formControlName="Campo" id="exampleFormControlSelect1">
@@ -26,10 +57,6 @@
     </form>
   </div>
 </div>
-
-
-
-
 <table class='table table-dark table-striped' aria-labelledby="tableLabel" *ngIf="autores">
   <thead>
     <tr>
@@ -49,7 +76,7 @@
       <td>{{ autores.libro.publishDate }}</td>
     </tr>
   </tbody>
-</table>
+</table>-->
 
 
 

@@ -13,19 +13,8 @@ import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common';
 import { JwtInterceptor } from './Services/auth/jwt-interceptor';
-//import { TableModule } from 'primeng/table';
-//import { SliderModule } from 'primeng/slider';
-//import { MultiSelectModule } from 'primeng/multiselect';
-//import { ContextMenuModule } from 'primeng/contextmenu';
-//import { ToastModule } from 'primeng/toast';
-//import { ButtonModule } from 'primeng/button';
-//import { CalendarModule } from 'primeng/calendar';
-//import { DialogModule } from 'primeng/dialog';
-//import { DropdownModule } from 'primeng/dropdown';
-//import { InputTextModule } from 'primeng/inputtext';
-//import { ProgressBarModule } from 'primeng/progressbar';
-//import { TabViewModule } from 'primeng/tabview';
-//import { CodeHighlighterModule } from 'primeng/codehighlighter';
+
+import { DxButtonModule, DxDataGridModule } from 'devextreme-angular';
 
 @NgModule({
   declarations: [
@@ -38,12 +27,12 @@ import { JwtInterceptor } from './Services/auth/jwt-interceptor';
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
-    ReactiveFormsModule,//Add if needed 
+    ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
     BrowserModule,
     FormsModule,
-    
+    DxButtonModule, DxDataGridModule,
     RouterModule.forRoot([
     { path: '', component: HomeComponent, pathMatch: 'full' },
     { path: 'counter', component: CounterComponent },
