@@ -1,11 +1,8 @@
-import { Component, Inject, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute, ParamMap  } from '@angular/router';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { Component, OnDestroy } from '@angular/core';
+
 import { Security } from './services/securityService';
 import { Subscription } from 'rxjs';
-import { Data } from 'src/app/services/dataService';
+
 
 
 @Component({
@@ -19,8 +16,7 @@ export class AppComponent implements OnDestroy {
   private subsAuth$: Subscription;
 
   constructor(
-    private securityService: Security,
-    private dataService: Data,
+    private securityService: Security
   ) {
     this.IsAuthenticated = this.securityService.IsAuthorized;
 
