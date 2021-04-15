@@ -2,8 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Security } from 'src/app/services/security';
-import { Data } from '../Services/data';
+import { Security } from 'src/app/services/securityService';
+import { Data } from '../Services/dataService';
 import notify from 'devextreme/ui/notify';
 import { ToastrService } from 'ngx-toastr';
 

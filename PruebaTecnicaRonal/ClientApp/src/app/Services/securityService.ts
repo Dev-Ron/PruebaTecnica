@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Storage } from './storage';
+import { Storage } from './storageService';
 import { Subject } from 'rxjs';
 
 @Injectable({

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Security } from './security';
+import { Security } from './securityService';
 import { Observable } from 'rxjs';
 
 @Injectable({

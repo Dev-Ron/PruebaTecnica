@@ -33,10 +33,10 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\Services\auth\auth-guard.ts" />
-    <None Remove="ClientApp\src\app\Services\data.ts" />
     <None Remove="ClientApp\src\app\Services\auth\jwt-interceptor.ts" />
-    <None Remove="ClientApp\src\app\Services\security.ts" />
-    <None Remove="ClientApp\src\app\Services\storage.ts" />
+    <None Remove="ClientApp\src\app\Services\dataService.ts" />
+    <None Remove="ClientApp\src\app\Services\securityService.ts" />
+    <None Remove="ClientApp\src\app\Services\storageService.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,10 +45,10 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\Services\auth\auth-guard.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\Services\data.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\dataService.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Services\auth\jwt-interceptor.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\Services\security.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\Services\storage.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\securityService.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Services\storageService.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

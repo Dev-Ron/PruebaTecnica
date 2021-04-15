@@ -3,9 +3,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap  } from '@angular/router';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { Security } from './services/security';
+import { Security } from './services/securityService';
 import { Subscription } from 'rxjs';
-import { Data } from 'src/app/services/data';
+import { Data } from 'src/app/services/dataService';
 
 
 @Component({
