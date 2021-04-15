@@ -16,9 +16,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { DxButtonModule, DxDataGridModule, DxPivotGridModule } from 'devextreme-angular';
 
 
-import { Security } from 'src/app/services/securityService';
-import { Data } from 'src/app/services/dataService';
-import { Storage } from 'src/app/services/storageService';
+import { Security } from './Services/securityService';
+import { Data } from './Services/dataService';
+import { Storage } from './Services/storageService';
 
 
 @NgModule({

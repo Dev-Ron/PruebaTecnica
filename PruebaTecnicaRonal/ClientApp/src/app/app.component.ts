@@ -1,6 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Input, OnDestroy } from '@angular/core';
 
-import { Security } from './services/securityService';
+import { Security } from './Services/securityService';
 import { Subscription } from 'rxjs';
 
 
